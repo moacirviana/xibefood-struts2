@@ -39,7 +39,6 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		try {
 			Usuario s = new Usuario();
 			s = UsuarioDAOImpl.getInstance().getBean(this.username);
-			System.out.println("Senha " + FuncsUtils.getInstance().encriptar(userpass));
 			if (s.getSenha().equals(FuncsUtils.getInstance().encriptar(userpass))) {
 				sessionmap.put("login",s);
 				addActionMessage(getText("login.sucesso"));
