@@ -24,7 +24,7 @@
 					  </div>
 				  </div>
 				</s:if>
-			<!-- FIM MENSAGENS -->
+			<!-- FIM error MENSAGENS -->
 			
 			<!-- MENSAGENS  DO SISTEMA  -->
 				<s:if test="hasActionMessages()">
