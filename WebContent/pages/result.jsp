@@ -5,33 +5,44 @@
 
 <div class="container">
   <div class="container-fluid">   
-	
-   <div class="panel panel-default">
-   <div class="panel-heading">Mensagem do sistema</div>
-   <div class="panel-body">
-       <p class="note">Veja as informações abaixo detalhadas pelo sistema.</p>
+  
 		 
            <!-- MENSAGENS DE ERRO DO SISTEMA  -->
 				<s:if test="hasActionErrors()">
-					<div class="alert alert-danger" role="alert" id="error">
-						<i class="glyphicon glyphicon-remove-sign"></i>
-						<s:iterator value="actionErrors">
-							<s:property escapeHtml="false" />
-							<br>
-						</s:iterator>
-					</div>
+				
+				<div class="card bg-danger text-center">
+				  <div class="card-header">Ocorreu um erro no Sistema </div>
+					  <div class="card-body">
+						    <h5 class="card-title">Veja as informações abaixo detalhadas</h5>
+						    <p class="card-text">
+						       <i class="glyphicon glyphicon-remove-sign"></i>
+						       <s:iterator value="actionErrors">
+								<s:property escapeHtml="false" />
+									<br>
+								</s:iterator>
+						    </p>
+					  </div>
+				  </div>
 				</s:if>
 			<!-- FIM MENSAGENS -->
 			
 			<!-- MENSAGENS  DO SISTEMA  -->
 				<s:if test="hasActionMessages()">
-					<div class="alert alert-success" role="alert" id="success_message">
-						<i class="glyphicon glyphicon-ok"></i>
-						<s:iterator value="actionMessages">
-							<s:property escapeHtml="false" />
-							<br>
-						</s:iterator>
-					</div>
+				
+					<div class="card bg-warning text-center">
+					  <div class="card-header">Mensagem do Sistema </div>
+						  <div class="card-body">
+							    <h5 class="card-title">Veja as informações abaixo detalhadas pelo sistema</h5>
+							    <p class="card-text">
+							    	<i class="glyphicon glyphicon-ok"></i>
+									<s:iterator value="actionMessages">
+										<s:property escapeHtml="false" />
+										<br>
+									</s:iterator>
+							    </p>
+						  </div>
+					  </div>
+					  
 				</s:if>
 			<!-- FIM MENSAGENS -->
 	
@@ -39,8 +50,7 @@
    </div>
 	
     		
-    </div>  
-  </div> 
+    
 
 <jsp:include page = "/javascripts.jsp" />
 
