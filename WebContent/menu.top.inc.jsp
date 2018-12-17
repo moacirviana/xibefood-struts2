@@ -30,8 +30,7 @@
               <a class="dropdown-item" href="${pageContext.request.contextPath}/clientes/listar">Clientes</a>
               <a class="dropdown-item" href="${pageContext.request.contextPath}/comandas/listar">Comanda</a>
               <a class="dropdown-item" href="${pageContext.request.contextPath}/produtos/listar">Cardápio</a>
-              
-              <a class="dropdown-item" href="#">Estatisticas</a>
+              <a class="dropdown-item" href="${pageContext.request.contextPath}/arquivos/frmSetup">Upload de arquivo</a>
             </div>
           </li>
           
