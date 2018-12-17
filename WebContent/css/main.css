@@ -81,3 +81,4 @@ body {
     display: block;
     margin-top: 10px;
 }
+.errorMessage { color: #CA300F; }
