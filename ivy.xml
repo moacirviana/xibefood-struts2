@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+    <info
+        organisation=""
+        module="xibefood"
+        status="integration">
+	</info>
+	
+	 <dependencies>
+	         
+	        <dependency org="org.apache.struts" name="struts2-core" rev="2.5.16" conf="*->default"/>
+			
+			<dependency org="org.apache.struts" name="struts2-convention-plugin" rev="2.5.16"/>
+			
+			<dependency org="org.apache.struts" name="struts2-json-plugin" rev="2.5.16" transitive="false"/>
+			
+			<dependency org="org.ow2.asm" name="asm" rev="5.2" transitive="false"/>
+			
+			<dependency org="org.ow2.asm" name="asm-commons" rev="5.2" transitive="false"/>
+			
+			<dependency org="org.hibernate" name="hibernate-core" rev="5.3.3.Final"/>
+			
+			<dependency org="org.apache.logging.log4j" name="log4j-core" rev="2.10.0" transitive="false"/>
+			
+			<dependency org="dom4j" name="dom4j" rev="1.6.1" transitive="false"/>
+			
+			<dependency org="mysql" name="mysql-connector-java" rev="5.1.13"/>
+			
+			<dependency org="org.xerial" name="sqlite-jdbc" rev="3.25.2"/>			
+
+		</dependencies>
+		
+</ivy-module>
