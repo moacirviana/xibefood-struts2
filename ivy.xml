@@ -20,15 +20,17 @@
 			
 			<dependency org="org.ow2.asm" name="asm-commons" rev="5.2" transitive="false"/>
 			
-			<dependency org="org.hibernate" name="hibernate-core" rev="5.3.3.Final"/>
+			<!-- <dependency org="org.hibernate" name="hibernate-core" rev="5.3.3.Final"/> -->
+			<dependency org="org.hibernate" name="hibernate-core" rev="5.4.0.Final"/> 
 			
-			<dependency org="org.apache.logging.log4j" name="log4j-core" rev="2.10.0" transitive="false"/>
+			<!-- <dependency org="org.apache.logging.log4j" name="log4j-core" rev="2.10.0" transitive="false"/> -->
+			<dependency org="org.apache.logging.log4j" name="log4j-core" rev="2.11.1" transitive="false"/>
 			
 			<dependency org="dom4j" name="dom4j" rev="1.6.1" transitive="false"/>
 			
 			<dependency org="mysql" name="mysql-connector-java" rev="5.1.13"/>
 			
-			<dependency org="org.xerial" name="sqlite-jdbc" rev="3.25.2"/>			
+			<!-- <dependency org="org.xerial" name="sqlite-jdbc" rev="3.25.2"/> -->			
 
 		</dependencies>
 		
