@@ -3,7 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page = "/mainhead.inc.jsp" />
 
- <div class="container-fluid">   
+ <div class="container-fluid">
+    
    <div class="card-columns"> 
       <div id="result"> </div>
       <div id="result2"> </div>
@@ -17,7 +18,7 @@
 <script>
 	$(document).ready(function() {
 		// COMANDAS EM ANDAMENTO 	
-		$.getJSON( "../comandas/listarSituacaoJson", function(jsonResponse) {
+		$.getJSON( "listarSituacaoJson", function(jsonResponse) {
 	 	   }).done (function(jsonResponse){
 	 		  var linha = "";
 	 		   var status = "";
@@ -29,20 +30,17 @@
 	              }
 	             
 	             var total = (value.total).toFixed(2).replace('.',',');
-	             // console.log(totall);
-	             
 	                linha = '<div class="card bg-'+status+'">\n'+
 					            '<div class="card-body text-center">\n'+
 					                 '<h4 class="card-title">'+value.cliente+'</h4>\n'+
 					                 '<p class="card-text">Atendente '+ value.usuario+' Total R$ ' + total + '</p>\n'+
-					                 '<a href="#" class="btn btn-primary">Fechar</a>\n'+
+					                 '<a href="frmSetupFechar?id='+value.id+'" class="btn btn-primary">Fechar</a>\n'+
 					           '</div></div>\n';
 	                $("#result2").append(linha);
 	                linha = "";
  			   });
-	 		 //$("#result").html(linha);
-	 		 //console.log(linha);
-	 		// SEM COMANDAS
+	 		 
+	 		// MESAS LIVRES
 	 		 $.getJSON( "../clientes/listarSemComandaJson", function(data) {
 		     }).done (function(data){
 			 		  var linha = "";
@@ -55,12 +53,11 @@
 			                 $("#result").append(linha);
 			                 linha = "";
 		 			   });
-			 		//$("#result2").html(lin);
-			 		// console.log(lin);
-			   });			  
+			   });	
  	   });
 	
 	});
+	
 </script>	
 
 

@@ -94,7 +94,7 @@ public class ClienteAction extends ActionSupport {
 	
 	@Action(value = "alterar", results = { 
 			@Result(name = "success", type = "json", params = { "root", "result" }),
-			@Result(name = "error", location = "/pages/error.jsp")},
+			@Result(name = "error", location = "/pages/resultAjax.jsp")},
 	        interceptorRefs = @InterceptorRef("authStack"))
 	public String doAlterar() {
 		HttpSession session = ServletActionContext.getRequest().getSession(true);
@@ -125,7 +125,7 @@ public class ClienteAction extends ActionSupport {
 	
 	@Action(value = "inserir", results = { 
 			@Result(name = "success", type = "json", params = { "root", "result" }),
-			@Result(name = "error", location = "/pages/error.jsp")},
+			@Result(name = "error", location = "/pages/resultAjax.jsp")},
           	interceptorRefs = @InterceptorRef("authStack"))
 	public String doInserir() {
 		HttpSession session = ServletActionContext.getRequest().getSession(true);

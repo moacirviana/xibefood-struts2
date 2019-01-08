@@ -48,9 +48,8 @@ $(document).ready(function() {
 	    	bootbox.confirm("Confirma ?", function(result){ 		  
 	           if (result){
 	    	    	var dados = $('#frmCliente').serialize();
-	    	    	var url = "${flag}?"+dados;
-	    	    	console.log(url);
 	    	    	// flag variavel do struts
+	    	    	var url = "${flag}?"+dados;
 			    	$.getJSON( url, function( data ) {
 			    		if (data.id==1){
 			    			$.notify({
