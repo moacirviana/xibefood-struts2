@@ -158,8 +158,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		System.out.println("Permissão -> " + u.getSenha().equals(FuncsUtils.getInstance().encriptar("123456")));
 		
 		System.out.println("Done!");
-		//u = dao.getBean("vinicius.cavalcante@tre-am.jus.br");
-		//System.out.println("GETBean Pelo email Nome " + u.getNome() + " CPF " + u.getCpf() + " end " + u.getEndereco().getEndereco());
+		u = dao.getBean("b@b");
+		System.out.println("GETBean Pelo email Nome " + u.getNome() );
 		
 	}
 }
