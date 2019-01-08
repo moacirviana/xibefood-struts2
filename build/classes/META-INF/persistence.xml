@@ -1,0 +1,50 @@
+<persistence version="1.0"
+	xmlns="http://java.sun.com/xml/ns/persistence">
+	
+	<persistence-unit name="h2" transaction-type="RESOURCE_LOCAL">
+	      <!-- <class>com.test.jpa.Student</class>  --> 
+		<properties>  
+			  <property name="javax.persistence.jdbc.driver"   value="org.h2.Driver" />
+		      <property name="javax.persistence.jdbc.url"      value="jdbc:h2:~/test;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE" />  <!-- jdbc:h2:mem:test | jdbc:h2:~/test-->
+		      <property name="javax.persistence.jdbc.user"     value="sa" />
+		      <property name="javax.persistence.jdbc.password" value="" />
+		      <property name="hibernate.dialect"               value="org.hibernate.dialect.H2Dialect"/>
+		      <property name="hibernate.hbm2ddl.auto"          value="create" />
+		      <property name="show_sql"                        value="true"/>
+		      <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false"/>      
+		</properties>
+	</persistence-unit>
+	
+	
+	<persistence-unit name="sqlite" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <properties>
+            <property name="hibernate.archive.autodetection" value="class" />
+            <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:C:/DBSqlite/xibedb.db3" />
+            <property name="javax.persistence.jdbc.user" value="" />
+            <property name="javax.persistence.jdbc.password" value="" />
+            <property name="hibernate.connection.autocommit" value="true"/>
+            <!--  <property name="format_sql" value="true" /> -->
+            <property name="hibernate.connection.charSet" value="UTF-8" />
+            <property name="hibernate.dialect" value="br.com.xibefood.DAO.SQLiteDialect" />
+            <property name="hibernate.hbm2ddl.auto" value="none" />
+            <property name="hibernate.show_sql" value="true" />
+        </properties>
+    </persistence-unit>
+
+	
+	<persistence-unit name="mysql" transaction-type="RESOURCE_LOCAL">
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3307/xibedb" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="usbw" />
+			<property name="hibernate.transaction.auto_close_session" value="false" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
+            <property name="hibernate.hbm2ddl.auto" value="none" />
+		</properties>
+	</persistence-unit>
+	
+</persistence>
