@@ -17,7 +17,7 @@ public interface VendaDAO {
 	
 	public Double total() throws Exception;
 	
-	public int insert(Venda venda) throws Exception;
+	public int inserir(Venda venda) throws Exception;
 	
 	public int alterar(Venda venda) throws Exception;
 	

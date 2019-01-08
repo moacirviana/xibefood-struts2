@@ -108,7 +108,7 @@ public class VendaDAOImpl implements VendaDAO {
 
 	
 	@Override
-   public int insert(Venda venda) throws Exception{
+   public int inserir(Venda venda) throws Exception{
 		int ret = 0;
 		try {
 		    dao.adicionar(venda);

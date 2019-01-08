@@ -70,10 +70,10 @@ public class VendasAction extends ActionSupport {
 		return "success";
 	}
 	
-	@Action(value = "incluir", results = { @Result(name = "success", location = "/pages/result.jsp"),
+	@Action(value = "inserir", results = { @Result(name = "success", location = "/pages/result.jsp"),
 			@Result(name = "error", location = "/pages/error.jsp")},
 			interceptorRefs = @InterceptorRef("authStack"))
-	public String doIncluir() {
+	public String doInserir() {
 		try {
 			HttpSession session = ServletActionContext.getRequest().getSession(true);
 			Usuario b = (Usuario)session.getAttribute("login");
@@ -86,10 +86,10 @@ public class VendasAction extends ActionSupport {
 			 this.venda.setStatus(0);
 			 this.venda.setTotal(this.venda.getValorTotal());
 			 this.venda.setDatacad(new Date(System.currentTimeMillis()));
-			 daoVenda.insert(this.venda);
-			 addActionMessage(getText("incluir.sucesso"));
+			 daoVenda.inserir(this.venda);
+			 addActionMessage(getText("inserir.sucesso"));
 		} catch (Exception e) {
-			addActionError(getText("incluir.error") + " SystemError: " + e.getMessage() );
+			addActionError(getText("inserir.error") + " SystemError: " + e.getMessage() );
 			return "error";
 		}
 		return "success";
@@ -124,9 +124,9 @@ public class VendasAction extends ActionSupport {
 			 v.setTotal(soma);
 			 daoVenda.alterar(v);
 			 //daoItens.insert(it);
-			 addActionMessage(getText("incluir.sucesso"));
+			 addActionMessage(getText("inserir.sucesso"));
 		} catch (Exception e) {
-			addActionError(getText("incluir.error") + " SystemError: " + e.getMessage() );
+			addActionError(getText("inserir.error") + " SystemError: " + e.getMessage() );
 			return "error";
 		}
 		return "success";
@@ -162,7 +162,7 @@ public class VendasAction extends ActionSupport {
 		try {
 			this.lstVenda = daoVenda.listar();
 		} catch (Exception e) {
-			addActionError(getText("error.listar"));
+			addActionError(getText("listar.error"));
 			return "error";
 		}
 		return "success";
@@ -176,7 +176,7 @@ public class VendasAction extends ActionSupport {
 		try {
 			this.lstVenda = daoVenda.listar();
 		} catch (Exception e) {
-			addActionError(getText("error.listar"));
+			addActionError(getText("listar.error"));
 			return "error";
 		}
 		return "success";
@@ -190,7 +190,7 @@ public class VendasAction extends ActionSupport {
 		try {
 			this.lstVendaSituacao = daoVenda.listarSituacao();
 		} catch (Exception e) {
-			addActionError(getText("error.listar"));
+			addActionError(getText("listar.error"));
 			return "error";
 		}
 		return "success";
@@ -204,7 +204,7 @@ public class VendasAction extends ActionSupport {
 		try {
 			this.lstVenda = daoVenda.listar("11/06/2018","11/06/2018");
 		} catch (Exception e) {
-			addActionError(getText("error.listar"));
+			addActionError(getText("listar.error"));
 			return "error";
 		}
 		return "success";
