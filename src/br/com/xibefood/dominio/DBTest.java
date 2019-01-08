@@ -22,16 +22,19 @@ public class DBTest {
 		c.setNome("MESA 01");
 		c.setCpf("04336034028");
 		c.setEmail("moacir.viana@gmail.com");
+		c.setStatus(1);
 		daoC.inserir(c);
 		Cliente c1 = new Cliente();
 		c1.setNome("MESA 02");
 		c1.setCpf("37644815015");
 		c1.setEmail("souzasilvar@yahoo.com");
+		c1.setStatus(1);
 		daoC.inserir(c1);
 		Cliente c2 = new Cliente();
 		c2.setNome("MESA 03");
 		c2.setCpf("57044824064");
 		c2.setEmail("josedasilva@hotmail.com");
+		c2.setStatus(1);
 		daoC.inserir(c2);
 		
 		
