@@ -5,10 +5,10 @@
 <div class="container">
   <div class="container-fluid">   
 
-	<table id="table2" class="table" cellspacing="0" width="100%">
+	<table id="table2" class="table">
 	<thead>
 	<tr> 
-	    <th width="5%">Id</th>
+	    <th width="5%"><a href="frmSetupNew" class="btn btn-secondary btn-sm" role="button" aria-pressed="true">Novo</a>
 		<th width="8%">Nome</th>		
 		<th width="8%">Endereco</th>
 		<th width="10%"></th>
