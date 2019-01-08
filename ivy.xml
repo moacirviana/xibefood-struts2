@@ -15,13 +15,16 @@
 			<dependency org="org.apache.struts" name="struts2-convention-plugin" rev="2.5.18"/>
 			<dependency org="org.apache.struts" name="struts2-json-plugin" rev="2.5.18" transitive="false"/>
 			
-			<dependency org="org.ow2.asm" name="asm" rev="5.2" transitive="false"/>
-			<dependency org="org.ow2.asm" name="asm-commons" rev="5.2" transitive="false"/>
+			<!-- <dependency org="org.ow2.asm" name="asm" rev="5.2" transitive="false"/> -->
+			<!-- <dependency org="org.ow2.asm" name="asm" rev="6.0" transitive="false"/> -->
 			
-			<!-- <dependency org="org.hibernate" name="hibernate-core" rev="5.3.3.Final"/> -->
-			<dependency org="org.hibernate" name="hibernate-core" rev="5.4.0.Final"/> 
+			<!-- <dependency org="org.ow2.asm" name="asm-commons" rev="5.2" transitive="false"/> -->
+			<!--<dependency org="org.ow2.asm" name="asm-commons" rev="6.0" transitive="false"/> -->
 			
-			<dependency org="org.apache.logging.log4j" name="log4j-core" rev="2.10.0" transitive="false"/>
+			<!--<dependency org="org.hibernate" name="hibernate-core" rev="5.3.3.Final"/> -->
+			<dependency org="org.hibernate" name="hibernate-core" rev="5.4.0.Final"/>  
+			
+			<dependency org="org.apache.logging.log4j" name="log4j-core" rev="2.11.1" transitive="false"/>
 			
 			<dependency org="dom4j" name="dom4j" rev="1.6.1" transitive="false"/>
 			
