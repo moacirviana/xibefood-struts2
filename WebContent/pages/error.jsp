@@ -5,22 +5,14 @@
 <div class="container-full">
   <div class="container-fluid">   
 
-<div class="panel panel-danger">
- <div class="panel-heading">Ops!! Ocorreu um erro ao tentar realizar o procedimento</div>
- <div class="panel-body">
- 
- 
-  <div class="alert alert-danger" role="alert">
-      <p>Mensagem do sistema:</p>
-    <br>
-    <s:actionerror /> 
+
+		<div class="alert alert-danger">
+		  <strong>Ops!</strong> <s:property value="getText('error.label')" />
+		       <s:actionerror />
+		</div>
+
+
    </div>  
-
-
-    </div>  
-  </div> 
-
-</div>  
   </div>
   
 <jsp:include page = "/javascripts.jsp" />
