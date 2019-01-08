@@ -10,11 +10,10 @@
 	
 	 <dependencies>
 	         
-	        <dependency org="org.apache.struts" name="struts2-core" rev="2.5.16" conf="*->default"/>
-			
-			<dependency org="org.apache.struts" name="struts2-convention-plugin" rev="2.5.16"/>
-			
-			<dependency org="org.apache.struts" name="struts2-json-plugin" rev="2.5.16" transitive="false"/>
+	        <!-- <dependency org="org.apache.struts" name="struts2-core" rev="2.5.16" conf="*->default"/> -->
+	        <dependency org="org.apache.struts" name="struts2-core" rev="2.5.18" conf="*->default"/>
+			<dependency org="org.apache.struts" name="struts2-convention-plugin" rev="2.5.18"/>
+			<dependency org="org.apache.struts" name="struts2-json-plugin" rev="2.5.18" transitive="false"/>
 			
 			<dependency org="org.ow2.asm" name="asm" rev="5.2" transitive="false"/>
 			
