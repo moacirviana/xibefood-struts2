@@ -63,7 +63,22 @@ public class ClienteDAOImpl implements ClienteDAO {
 			 TypedQuery<Cliente> query = em.createQuery("SELECT c FROM Cliente c WHERE c.email = :email", Cliente.class);
 			 cliente = query.setParameter("email", email).getSingleResult();
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+		}finally {
+			em.close();
+		}
+		return cliente;
+	}
+	
+	@Override
+	public Cliente getBeanByName(String nome) throws Exception{
+		Cliente cliente = new Cliente();
+		EntityManager em = EntityManagerProvider.getInstance().createManager();
+		try {
+			 TypedQuery<Cliente> query = em.createQuery("SELECT c FROM Cliente c WHERE c.nome = :nome", Cliente.class);
+			 cliente = query.setParameter("nome", nome.toUpperCase()).getSingleResult();
+		} catch (Exception e) {
+			// e.printStackTrace();
 		}finally {
 			em.close();
 		}
@@ -83,7 +98,7 @@ public class ClienteDAOImpl implements ClienteDAO {
 		  }
 		  catch (Exception e) {
 			     em.close();
-				e.printStackTrace();
+				// e.printStackTrace();
 		  }	finally {
 				em.close();
 		  }
@@ -94,11 +109,11 @@ public class ClienteDAOImpl implements ClienteDAO {
 	public int inserir (Cliente cliente) throws Exception{
 		int ret = 0;
 		try {
+			cliente.setNome(cliente.getNome().toUpperCase());
 			dao.adicionar(cliente);
 			ret =1;
 		} catch (Exception e) {
-			//System.out.println("Ocorreu um ERRO " + e.getMessage());
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return ret;
 	}
@@ -107,11 +122,12 @@ public class ClienteDAOImpl implements ClienteDAO {
 	public int alterar (Cliente cliente) throws Exception{
 		int ret = 0;
 		try {
+			cliente.setNome(cliente.getNome().toUpperCase());
 			dao.atualizar(cliente);
 			ret =1;
 		} catch (Exception e) {
 			//System.out.println("Ocorreu um ERRO " + e.getMessage());
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return ret;
 	}
@@ -145,18 +161,27 @@ public class ClienteDAOImpl implements ClienteDAO {
 	public static void main(String[] args) throws Exception{
 		ClienteDAO dao = ClienteDAOImpl.getInstance();
 		
-		/*Cliente u = new Cliente();
+		Cliente u = new Cliente();
+		u = dao.getBeanByName("MESA 10");
+		if (u.getNome()!=null){
+			 System.out.println("Tem valor");	
+		}else {
+			System.out.println("valor nulo");
+		}
+		
+		
+		/*
 		u.setNome("MESA 05");
 		u.setSigla("MESA 05");
 		//String senha = FuncsUtils.getInstance().encriptar("senha123");
 		
 		int ret = dao.inserir(u);
 		System.out.println("atualizado  = " + ret );	*/	
-		 
+		 /*
 		 for (Cliente z : dao.listarSemComanda()) {
 				System.out.println("Nome " + z.getNome()); 
 		 }
-		
+		*/
 		/*
 		u = dao.getBean(4);
 		System.out.println("GetBean pelo ID Nome " + u.getNome() + " CPF " + u.getCpf());

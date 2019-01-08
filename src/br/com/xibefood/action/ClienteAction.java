@@ -28,7 +28,9 @@ public class ClienteAction extends ActionSupport {
 	private Cliente cliente;
 	private int id;
 	private BeanResult result;
-
+	private String flag;
+	
+	
 	@Action(value = "listarJson", results = {
 			@Result(name = "success", type = "json", params = { "root", "lstCliente" }),
 			@Result(name = "error", location = "/pages/resultAjax.jsp") })
@@ -37,7 +39,7 @@ public class ClienteAction extends ActionSupport {
 		try {
 			this.lstCliente = ClienteDAOImpl.getInstance().listar();
 		} catch (Exception e) {
-			addActionError(getText("error.listar"));
+			addActionError(getText("listar.error"));
 			return "error";
 		}
 		return "success";
@@ -51,7 +53,7 @@ public class ClienteAction extends ActionSupport {
 		try {
 			this.lstCliente = ClienteDAOImpl.getInstance().listarCbx();
 		} catch (Exception e) {
-			addActionError(getText("error.listar"));
+			addActionError(getText("listar.error"));
 			return "error";
 		}
 		return "success";
@@ -67,7 +69,7 @@ public class ClienteAction extends ActionSupport {
 		try {
 			this.lstCliente = ClienteDAOImpl.getInstance().listarSemComanda();
 		} catch (Exception e) {
-			addActionError(getText("error.listar"));
+			addActionError(getText("listar.error"));
 			return "error";
 		}
 		return "success";
@@ -82,18 +84,19 @@ public class ClienteAction extends ActionSupport {
 		try {
 			this.lstCliente = ClienteDAOImpl.getInstance().listar();
 		} catch (Exception e) {
-			addActionError(getText("error.listar"));
+			addActionError(getText("listar.error"));
 			return "error";
 		}
 		return "success";
 	}
 	
+	// * o método alterar pode ser chamado para incluir um novo registro /*
 	
 	@Action(value = "alterar", results = { 
 			@Result(name = "success", type = "json", params = { "root", "result" }),
-			@Result(name = "error", location = "/pages/error.jsp") })
-	// interceptorRefs = @InterceptorRef("authStack")
-	public String alterar() {
+			@Result(name = "error", location = "/pages/error.jsp")},
+	        interceptorRefs = @InterceptorRef("authStack"))
+	public String doAlterar() {
 		HttpSession session = ServletActionContext.getRequest().getSession(true);
 		Usuario b = (Usuario)session.getAttribute("login");
 		int ret = 0;
@@ -101,7 +104,7 @@ public class ClienteAction extends ActionSupport {
 		try {
 			if (b.getAdmin()==1) {
 				ret =  ClienteDAOImpl.getInstance().alterar(this.cliente);
-				res.setMensagem(getText("editar.sucesso"));
+				res.setMensagem(getText("alterar.sucesso"));
 				res.setId(ret);
 				
 			}else {
@@ -111,13 +114,52 @@ public class ClienteAction extends ActionSupport {
 			this.result = res;
 		} catch (Exception e) {
 			   //addActionError(getText("editar.error"));
-			    res.setMensagem(getText("editar.error"));
+			    res.setMensagem(getText("alterar.error"));
 			   res.setError(e.getMessage());
 			 this.result = res;
 			return "error";
 		}
 		return "success";
 	}
+	
+	
+	@Action(value = "inserir", results = { 
+			@Result(name = "success", type = "json", params = { "root", "result" }),
+			@Result(name = "error", location = "/pages/error.jsp")},
+          	interceptorRefs = @InterceptorRef("authStack"))
+	public String doInserir() {
+		HttpSession session = ServletActionContext.getRequest().getSession(true);
+		Usuario b = (Usuario)session.getAttribute("login");
+		int ret = 0;
+		BeanResult res = new BeanResult();
+		try {
+			if (b.getAdmin()==1) {
+				// VERIFICA SE A DESCRIÇÃO JÁ EXISTE
+				Cliente c = new Cliente();
+				c = ClienteDAOImpl.getInstance().getBeanByName(this.cliente.getNome());
+				if (c.getNome()!=null) {
+					res.setMensagem(getText("registro.existe"));
+				}else {
+					ret =  ClienteDAOImpl.getInstance().inserir(this.cliente);
+					res.setMensagem(getText("inserir.sucesso"));
+					res.setId(ret);
+				}
+				
+			}else {
+			   res.setId(0);
+			   res.setMensagem(getText("permissao.negada"));
+			}
+			this.result = res;
+		} catch (Exception e) {
+			   //addActionError(getText("editar.error"));
+			    res.setMensagem(getText("inserir.error"));
+			   res.setError(e.getMessage());
+			 this.result = res;
+			return "error";
+		}
+		return "success";
+	}
+	
 	
 	@Action(value = "remover", results = { @Result(name = "success", type = "json", params = { "root", "result" }),
 			@Result(name = "error", location = "/pages/error.jsp") })
@@ -147,15 +189,29 @@ public class ClienteAction extends ActionSupport {
 		return "success";
 	}
 	
-	@Action(value = "frmSetupEdit", results = { @Result(name = "success", location = "/forms/frmEditaCliente.jsp"),
+	
+	@Action(value = "frmSetupNew", results = { @Result(name = "success", location = "/forms/frmCliente.jsp"),
+			@Result(name = "error", location = "/pages/error.jsp")},
+			interceptorRefs = @InterceptorRef("authStack"))
+	public String frmSetupNew() {
+		try {
+			this.flag = "inserir";
+		} catch (Exception e) {
+			addActionError(getText("frmsetup.error"));
+			return "error";
+		}
+		return "success";
+	}
+	
+	@Action(value = "frmSetupEdit", results = { @Result(name = "success", location = "/forms/frmCliente.jsp"),
 			@Result(name = "error", location = "/pages/error.jsp")} 
 	)			// interceptorRefs = @InterceptorRef("authStack")
 	public String frmSetupEdit() {
-
 		try {
+			this.flag = "alterar";
 			this.cliente = ClienteDAOImpl.getInstance().getBean(this.id);
 		} catch (Exception e) {
-			addActionError(getText("error.listar"));
+			addActionError(getText("frmsetup.error"));
 			return "error";
 		}
 		return "success";
@@ -179,21 +235,17 @@ public class ClienteAction extends ActionSupport {
 		return lstCliente;
 	}
 
-
 	public void setLstCliente(List<Cliente> lstCliente) {
 		this.lstCliente = lstCliente;
 	}
-
 
 	public Cliente getCliente() {
 		return cliente;
 	}
 
-
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-
 
 	public int getId() {
 		return id;
@@ -203,14 +255,22 @@ public class ClienteAction extends ActionSupport {
 		this.id = id;
 	}
 
-
 	public BeanResult getResult() {
 		return result;
 	}
 
-
 	public void setResult(BeanResult result) {
 		this.result = result;
 	}
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+	
+	
 
 }

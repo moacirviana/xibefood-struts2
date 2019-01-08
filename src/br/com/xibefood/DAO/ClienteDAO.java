@@ -16,6 +16,8 @@ public interface ClienteDAO {
 	
 	public Cliente getBean(String email) throws Exception;
 	
+	public Cliente getBeanByName(String nome) throws Exception;
+	
 	public int inserir (Cliente cliente) throws Exception;
 	
 	public int alterar (Cliente cliente) throws Exception;
