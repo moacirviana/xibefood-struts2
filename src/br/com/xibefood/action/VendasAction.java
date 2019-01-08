@@ -40,19 +40,39 @@ public class VendasAction extends ActionSupport {
 	private final static VendaDAO daoVenda = VendaDAOImpl.getInstance();
 	private final static VendaItemDAO daoItens = VendaItemDAOImpl.getInstance();
 	
-	@Action(value = "fechar", results = { @Result(name = "success", location = "/pages/result.jsp"),
+	
+	@Action(value = "frmSetupFechar", results = { @Result(name = "success", location = "/forms/frmFecharVenda.jsp"),
 			@Result(name = "error", location = "/pages/error.jsp")},
-			interceptorRefs = @InterceptorRef("authStack"))
-	public String doFechar() {
+		   interceptorRefs = @InterceptorRef("authStack"))
+	public String setupFechar() {
 		try {
-			 this.venda = daoVenda.getBean(this.venda.getId());
-			 this.venda.setStatus(this.id);
-			 daoVenda.alterar(this.venda);
-			 addActionMessage(getText("fechameto.sucesso"));
+			 this.venda = daoVenda.getBean(this.getId());
 		} catch (Exception e) {
-			addActionError(getText("fechamento.erro") + " SystemError: " + e.getMessage() );
+			addActionError(getText("frmsetup.error") + " SystemError: " + e.getMessage() );
 			return "error";
 		}
+		return "success";
+	}
+	
+	
+	@Action(value = "fechar", results = { 
+			@Result(name = "success", type = "json", params = { "root", "result" }),
+			@Result(name = "error", location = "/pages/resultAjax.jsp")},
+          	interceptorRefs = @InterceptorRef("authStack"))
+	public String doFechar() {
+		BeanResult res = new BeanResult();
+		try {
+			 this.venda = daoVenda.getBean(this.id);
+			 this.venda.setStatus(2);
+			 res.setId(daoVenda.alterar(this.venda));
+			 res.setMensagem(getText("fechameto.sucesso"));
+		} catch (Exception e) {
+			   res.setId(0);
+			  res.setMensagem(getText("fechamento.erro") + " SystemError: " + e.getMessage());
+			 this.result = res;
+			return "error";
+		}
+		 this.result = res;
 		return "success";
 	}
 	
