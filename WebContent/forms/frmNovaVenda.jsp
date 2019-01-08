@@ -8,7 +8,7 @@
 	<div class="card-body">
 	   <h5 class="card-title">Nova Comanda</h5>
 	    
-	 <form action="incluir" method="post" name="form1" id="frmVenda">
+	 <form action="inserir" method="post" name="form1" id="frmVenda">
 	    
 	          <div class="form-row">
 			    <div class="form-group col-md-6">
