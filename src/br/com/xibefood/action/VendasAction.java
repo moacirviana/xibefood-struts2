@@ -19,6 +19,7 @@ import br.com.xibefood.DAO.VendaDAO;
 import br.com.xibefood.DAO.VendaDAOImpl;
 import br.com.xibefood.DAO.VendaItemDAO;
 import br.com.xibefood.DAO.VendaItemDAOImpl;
+import br.com.xibefood.DTO.ProdutosMaisVendidos;
 import br.com.xibefood.DTO.VendaSituacaoDTO;
 import br.com.xibefood.dominio.BeanResult;
 import br.com.xibefood.dominio.Usuario;
@@ -33,6 +34,8 @@ public class VendasAction extends ActionSupport {
 	private List<Venda> lstVenda;
 	private List<VendaSituacaoDTO> lstVendaSituacao;
 	private List<VendaItens> itens;
+	private List<ProdutosMaisVendidos> lstProdutosMaisVendidos;
+	
    // private VendaItens item;
 	private Venda venda;
 	private int id = 0;
@@ -265,6 +268,44 @@ public class VendasAction extends ActionSupport {
 		return "success";
 	}
 
+	@Action(value = "getBeanLimpo", results = { @Result(name = "success", location = "/consultas/vendas-bean-limpo.jsp"),
+			@Result(name = "error", location = "/pages/error.jsp")}, 
+			interceptorRefs = @InterceptorRef("authStack"))
+	public String getBeanLimpo() {
+		try {
+			this.venda = daoVenda.getBean(this.id);
+		} catch (Exception e) {
+			addActionError(getText("getbean.error"));
+			return "error";
+		}
+		return "success";
+	}
+	
+	
+	@Action(value = "getProdutosMaisVendidos", results = { @Result(name = "success", location = "/consultas/produto-mais-vendidos.jsp"),
+			@Result(name = "error", location = "/pages/error.jsp")}, 
+			interceptorRefs = @InterceptorRef("authStack"))
+	public String getProdutosMaisVendidos() {
+		try {
+			this.lstProdutosMaisVendidos = daoVenda.ListarProdutosMaisVendidos();
+		} catch (Exception e) {
+			addActionError(getText("getbean.error"));
+			return "error";
+		}
+		return "success";
+	}
+	
+	@Action(value = "getProdutosMaisVendidosJson", results = { @Result(name = "success", type = "json", params = { "root", "lstProdutosMaisVendidos" }),
+			@Result(name = "error", location = "/pages/error.jsp") })
+	public String getProdutosMaisVendidosJson() {
+		try {
+			this.lstProdutosMaisVendidos = daoVenda.ListarProdutosMaisVendidos();
+		} catch (Exception e) {
+			addActionError(getText("getbean.error"));
+			return "error";
+		}
+		return "success";
+	}
 	
 	public List<Venda> getLstVenda() {
 		return lstVenda;
@@ -320,6 +361,16 @@ public class VendasAction extends ActionSupport {
 
 	public void setLstVendaSituacao(List<VendaSituacaoDTO> lstVendaSituacao) {
 		this.lstVendaSituacao = lstVendaSituacao;
+	}
+
+
+	public List<ProdutosMaisVendidos> getLstProdutosMaisVendidos() {
+		return lstProdutosMaisVendidos;
+	}
+
+
+	public void setLstProdutosMaisVendidos(List<ProdutosMaisVendidos> lstProdutosMaisVendidos) {
+		this.lstProdutosMaisVendidos = lstProdutosMaisVendidos;
 	}
 
 
