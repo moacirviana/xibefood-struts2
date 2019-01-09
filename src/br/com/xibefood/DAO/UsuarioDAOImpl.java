@@ -37,13 +37,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	@Override
 	public Usuario getBean(String email) throws Exception{
-		Usuario usuario = null;
+		Usuario usuario = new Usuario();
 		EntityManager em = EntityManagerProvider.getInstance().createManager();
 		try {						
 			 TypedQuery<Usuario> query = em.createQuery("SELECT c FROM Usuario c WHERE c.email = :email", Usuario.class);
 			 usuario = query.setParameter("email", email).getSingleResult();
 		} catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		}finally {
 			em.close();
 		}

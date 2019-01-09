@@ -92,7 +92,8 @@ $(document).ready(function() {
 	function CarregaCliente(){
 	    var select = $('#cliente');	      
 	    select.find('option').remove();	      
-			      $.getJSON('../comandas/listarSituacaoJson',function(jsonResponse) {			    	  
+			 
+	    	$.getJSON('../comandas/listarSituacaoJson',function(jsonResponse) {			    	  
 			    	  $('<option>').val(-1).text("Informe o Cliente").appendTo(select);
 			    	      var status="";
 			              $.each(jsonResponse, function(key, value) {
@@ -100,18 +101,20 @@ $(document).ready(function() {
 			            	  else{status="";}
 			                 $('<option>').val(value.id).text(value.cliente+status).appendTo(select);
 	       			 });
-		     });
+		     }); 
 	  }
 
 	function CarregaProduto(id){
 	  var select = $('#produto'+id);	      
 	      select.find('option').remove();	      
-			      $.getJSON('../produtos/listarJson',function(jsonResponse) {			    	  
+			  
+	      $.getJSON('../produtos/listarJson',function(jsonResponse) {			    	  
 			    	  $('<option>').val(-1).text("Informe o cardápio").appendTo(select);			    	  
 			              $.each(jsonResponse, function(key, value) {
 			                $('<option>').val(value.id).text(("0000" + value.id).slice(-4) + " " + value.descricao).appendTo(select);
 	       			      });
 		          });
+			
 	  }	
 	
 	var line = 0;
