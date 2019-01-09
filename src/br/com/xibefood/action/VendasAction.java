@@ -76,6 +76,27 @@ public class VendasAction extends ActionSupport {
 		return "success";
 	}
 	
+	@Action(value = "mudarStatus", results = { 
+			@Result(name = "success", type = "json", params = { "root", "result" }),
+			@Result(name = "error", location = "/pages/resultAjax.jsp")},
+          	interceptorRefs = @InterceptorRef("authStack"))
+	public String doMudarStatus() {
+		BeanResult res = new BeanResult();
+		try {
+			 this.venda = daoVenda.getBean(this.venda.getId());
+			 this.venda.setStatus(this.id);
+			 res.setId(daoVenda.alterar(this.venda));
+			 res.setMensagem(getText("pedir.conta"));
+		} catch (Exception e) {
+			   res.setId(0);
+			  res.setMensagem(getText("error.label") + " SystemError: " + e.getMessage());
+			 this.result = res;
+			return "error";
+		}
+		 this.result = res;
+		return "success";
+	}
+	
 	@Action(value = "frmSetupNova", results = { @Result(name = "success", location = "/forms/frmNovaVenda.jsp"),
 			@Result(name = "error", location = "/pages/error.jsp")},
 		   interceptorRefs = @InterceptorRef("authStack"))
@@ -99,6 +120,7 @@ public class VendasAction extends ActionSupport {
 			Usuario b = (Usuario)session.getAttribute("login");
 			 for(VendaItens item: this.itens) {
 				 item.setValor(item.getSubTotal());
+				 item.setDesconto(0.0);
 				 item.setVenda(this.venda);
 				 this.venda.getItens().add(item);	 
 			 }
