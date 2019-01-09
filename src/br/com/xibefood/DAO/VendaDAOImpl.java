@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import br.com.xibefood.DTO.ProdutosMaisVendidos;
 import br.com.xibefood.DTO.VendaSituacaoDTO;
 import br.com.xibefood.dominio.Venda;
 import br.com.xibefood.dominio.VendaItens;
@@ -37,6 +38,24 @@ public class VendaDAOImpl implements VendaDAO {
 		  TypedQuery<VendaSituacaoDTO> query = em.createQuery("SELECT NEW VendaSituacaoDTO(v.id, v.datacad, "
 			 		 + "v.cliente.nome, v.usuario.nome, v.total, v.status) "
 			 		 + "FROM Venda v WHERE v.status in (0,1)", VendaSituacaoDTO.class);
+			lista = query.getResultList();
+		  }
+		  catch (Exception e) {
+			     em.close();
+				e.printStackTrace();
+		  }	finally {
+				em.close();
+		  }
+		return lista;	
+	}
+	
+	@Override
+	public List<ProdutosMaisVendidos> ListarProdutosMaisVendidos() throws Exception{
+		List<ProdutosMaisVendidos> lista = new ArrayList<ProdutosMaisVendidos>();
+		EntityManager em = EntityManagerProvider.getInstance().createManager();
+	   try {	  
+		  TypedQuery<ProdutosMaisVendidos> query = em.createQuery("SELECT NEW ProdutosMaisVendidos(p.id, p.descricao, COUNT(v.id.produto)) FROM Produto p, VendaItens v" + 
+		  														" WHERE p.id=v.id.produto GROUP BY p.id, p.descricao", ProdutosMaisVendidos.class);
 			lista = query.getResultList();
 		  }
 		  catch (Exception e) {
@@ -149,11 +168,19 @@ public class VendaDAOImpl implements VendaDAO {
     
 	public static void main(String[] args) throws Exception{
 		VendaDAO dao = VendaDAOImpl.getInstance();
+		/*
 		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 		for (VendaSituacaoDTO venda : dao.listarSituacao()) {
 			System.out.println("Data " + venda.getDatacad() + " Cliente " + 
 		                       venda.getCliente() + " total = " + nf.format(venda.getTotal()) );
 		}
+		*/
+		for (ProdutosMaisVendidos v : dao.ListarProdutosMaisVendidos()) {
+			System.out.println("Produto " + v.getDescricao() + " Qtd " + v.getTotalVendidos());
+		}
+		
+		
+		
 		
 	}
 }

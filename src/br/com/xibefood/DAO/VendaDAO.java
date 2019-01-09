@@ -2,6 +2,7 @@ package br.com.xibefood.DAO;
 
 import java.util.List;
 
+import br.com.xibefood.DTO.ProdutosMaisVendidos;
 import br.com.xibefood.DTO.VendaSituacaoDTO;
 import br.com.xibefood.dominio.Venda;
 
@@ -13,6 +14,8 @@ public interface VendaDAO {
 	
 	public List<VendaSituacaoDTO> listarSituacao() throws Exception;
 	
+	public List<ProdutosMaisVendidos> ListarProdutosMaisVendidos() throws Exception;
+	
 	public Venda getBean(int id) throws Exception;
 	
 	public Double total() throws Exception;
@@ -22,5 +25,6 @@ public interface VendaDAO {
 	public int alterar(Venda venda) throws Exception;
 	
 	public int remover(Venda venda) throws Exception;
+
 
 }
