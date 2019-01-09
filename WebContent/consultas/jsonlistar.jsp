@@ -15,6 +15,9 @@
 		
 	<p><a target="_blank" href="${pageContext.request.contextPath}/comandas/listarSituacaoJson">Clientes/Mesas Situacao</a></p>
 	
+	<p><a target="_blank" href="${pageContext.request.contextPath}/comandas/getProdutosMaisVendidosJson">Produtos Mais Vendidos</a></p>
+	
+	
 	
 	
    </div>  

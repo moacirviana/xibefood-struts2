@@ -4,7 +4,7 @@
     <script src="${pageContext.request.contextPath}/js/popper.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootbox.min.js"></script>
-    
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
     
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap-notify.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/select2.min.js"></script>
