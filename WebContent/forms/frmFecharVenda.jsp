@@ -63,7 +63,7 @@
 			    
 			  </div>
 			  				  
-			  <button id="btnFecharVenda" type="button" class="btn btn-sm btn-success">Fechar</button>
+			  <button id="btnFecharVenda" type="button" class="btn btn-sm btn-success">Pagar</button>
 			   
        </form>
        <br>
