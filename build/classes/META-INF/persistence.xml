@@ -36,8 +36,9 @@
 	
 	<persistence-unit name="mysql" transaction-type="RESOURCE_LOCAL">
 		<properties>
+			<property name="eclipselink.allow-zero-id" value="true"/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3307/xibedb" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/xibedb" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="usbw" />
 			<property name="hibernate.transaction.auto_close_session" value="false" />
