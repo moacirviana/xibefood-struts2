@@ -78,7 +78,7 @@
 			var data = $(event.delegateTarget).data();
 			var id = data.recordId;
 			
-			bootbox.confirm("Confirma essa venda? ", function(result){ 		  
+			bootbox.confirm("Confirma excluir essa venda? ", function(result){ 		  
 		           if (result){
 		    	    	
 				    	$.getJSON( "remover?venda.id="+id, function( data ) {

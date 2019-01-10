@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import br.com.xibefood.dominio.Venda;
 import br.com.xibefood.dominio.VendaItens;
 
 
@@ -79,7 +80,10 @@ public class VendaItemDAOImpl implements VendaItemDAO {
 	public int alterar(VendaItens item) throws Exception{
 		int ret = 0;
 		try {
+			
+			
 			dao.atualizar(item);
+			
 			ret=1;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -100,7 +104,13 @@ public class VendaItemDAOImpl implements VendaItemDAO {
 	
     
 	public static void main(String[] args) throws Exception{
-		
+		/* 
+		VendaItemDAO daoItens = VendaItemDAOImpl.getInstance();
+		 VendaDAO vendaDao = VendaDAOImpl.getInstance();
+		 VendaItens i = new VendaItens();
+		 Venda venda = new Venda();
+		 venda = vendaDao.getBean(5);
+		 */
 		
 	}
 }

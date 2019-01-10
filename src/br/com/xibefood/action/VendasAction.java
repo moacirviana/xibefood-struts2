@@ -184,10 +184,20 @@ public class VendasAction extends ActionSupport {
 		BeanResult result = new BeanResult();
 		int ret = 0;
 		try {
-			ret = daoVenda.remover(this.venda);
-			result.setId(ret);
-			result.setMensagem(getText("remover.sucesso"));
+			// SOMENTE ADMINISTRADORES PODEM EXCLUIR TODA A COMANDA
+			HttpSession session = ServletActionContext.getRequest().getSession(true);
+			Usuario b = (Usuario)session.getAttribute("login");
+			if (b.getAdmin()==1) {
+				ret = daoVenda.remover(this.venda);
+				result.setId(ret);
+				result.setMensagem(getText("remover.sucesso"));
+			}else
+			{	
+				result.setId(0);
+				result.setMensagem(getText("permissao.negada"));
+			}
 			this.result = result;
+			
 		} catch (Exception e) {
 			    result.setId(0);
 			   result.setMensagem(getText("remover.error") +" Error:" + e.getMessage());

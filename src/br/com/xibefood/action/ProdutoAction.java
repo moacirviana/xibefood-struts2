@@ -1,11 +1,14 @@
 package br.com.xibefood.action;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -16,45 +19,105 @@ import com.opensymphony.xwork2.ActionSupport;
 import br.com.xibefood.DAO.ProdutoDAOImpl;
 import br.com.xibefood.dominio.Produto;
 
-@SuppressWarnings("serial")
 @Namespace("/produtos")
 @ResultPath(value = "/")
 @ParentPackage(value = "default")
 public class ProdutoAction extends ActionSupport {
+	private static final long serialVersionUID = 1L;
 	private List<Produto> lstProduto;
 	private Produto produto;
 	private int id;
 	// ATRIBUTOS PARA FAZER O DOWNLOAD DA IMAGEM
-	private File fileUpload;
-	private String fileUploadContentType;
-	private String fileUploadFileName;
-	private InputStream inputStream;
-	private String fileName;
+	private File upload;
+	private String uploadFileName;
+	private String uploadContentType;
 	
-	
-	@Action(value = "frmSetupNovo", results = { @Result(name = "success", location = "/forms/frmNovoProduto.jsp"),
-			@Result(name = "error", location = "/pages/error.jsp")} 
-	)			// interceptorRefs = @InterceptorRef("authStack")
+    @Action(value = "frmSetupNovo", results = { @Result(name = "success", location = "/forms/frmNovoProduto.jsp"),
+		@Result(name = "error", location = "/pages/error.jsp")},
+		interceptorRefs = @InterceptorRef("authStack"))
 	public String setupNovoProduto() {
 		return "success";
 	}
-	
-	@Action(value = "incluir",
-            results = { @Result(name = "success", type = "stream",
-                params = { "contentType", "application/octet-stream",
-                            "inputName", "inputStream",
-                            "bufferSize", "1024",
-                            "contentDisposition","filename=\"${fileName}\"" }) })	// interceptorRefs = @InterceptorRef("authStack")
-	public String doIncluir() {
+    
+    
+    @Action(value = "frmSetupEditar", results = { @Result(name = "success", location = "/forms/frmNovoProduto.jsp"),
+    		@Result(name = "error", location = "/pages/error.jsp")},
+    		interceptorRefs = @InterceptorRef("authStack"))
+    	public String frmSetupEditar() {
+    		try {
+    			this.produto = ProdutoDAOImpl.getInstance().getBean(this.id);
+    		}catch (Exception e) {
+    			return "error";
+			}
+    		return "success";
+    	}
 		
-		String pathToFile = "c:/temp/img/" + fileName;
+	
+	@Action( value = "/incluir",
+	results={@Result(name="success",location="/forms/frmNovoProduto.jsp"),
+	         @Result(name="input",location="/forms/frmNovoProduto.jsp")
+		},
+	            interceptorRefs={
+		        @InterceptorRef(
+		            params={"allowedTypes","image/jpeg,application/zip",
+				    "maximumSize","1000000"}, 
+		            value="fileUpload"
+		        ),
+		        @InterceptorRef("authStack"),
+		        @InterceptorRef("validation")
+	    }
+	)
+	public String doIncluir() {
         try {
-            inputStream = new FileInputStream(new File(pathToFile));
+       	   // VERIFICA SE O ARQUIVO FOI INFORMADO
+			 if (! (uploadFileName==null)){
+				 this.produto.setPicture(readBytes(upload));
+			}
+			 int ret = ProdutoDAOImpl.getInstance().inserir(this.produto);
+			 if (ret==0) {
+				 addActionError(getText("inserir.error"));
+			 }else {
+				 addActionMessage(getText("inserir.sucesso")); }
         } catch (Exception e) {
-            return ERROR;
+        	 addActionError(getText("inserir.error"));
+        	 return "error";
         }
-        return SUCCESS;
+        return "success";
 	}
+	
+	
+	  @Action( value = "/alterar",
+			results={@Result(name="success",location="/forms/frmNovoProduto.jsp"),
+			         @Result(name="input",location="/forms/frmNovoProduto.jsp")
+				}, interceptorRefs={
+				        @InterceptorRef(
+				            params={"allowedTypes","image/jpeg,image/gif,image/png",
+						    "maximumSize","1000000"},value="fileUpload"
+				        ),
+				        @InterceptorRef("authStack"),
+				        @InterceptorRef("validation")
+			    })
+			public String doAlterar() {
+		        try {
+		       	   // VERIFICA SE O ARQUIVO FOI INFORMADO
+					 if (! (uploadFileName==null)){
+						 this.produto.setPicture(readBytes(upload));
+					}else {
+						Produto p = new Produto();
+						p = ProdutoDAOImpl.getInstance().getBean(this.produto.getId());
+						this.produto.setPicture(p.getPicture());
+					}
+					 int ret = ProdutoDAOImpl.getInstance().alterar(this.produto);
+					 if (ret==0) {
+						 addActionError(getText("alterar.error"));
+					 }else {
+						 addActionMessage(getText("alterar.sucesso")); }
+		        } catch (Exception e) {
+		        	 addActionError(getText("alterar.error"));
+		        	 return "error";
+		        }
+		        return "success";
+			}
 	
 	@Action(value = "listarJson", results = {
 			@Result(name = "success", type = "json", params = { "root", "lstProduto" }),
@@ -95,28 +158,50 @@ public class ProdutoAction extends ActionSupport {
 		}
 		return "success";
 	}
+	
 
-    
+	public byte[] readBytes(File file) throws IOException {
+		ByteArrayOutputStream ous = null;
+		InputStream ios = null;
+		try {
+			byte[] buffer = new byte[4096];
+			ous = new ByteArrayOutputStream();
+			ios = new FileInputStream(file);
+			int read = 0;
+			while ((read = ios.read(buffer)) != -1) {
+				ous.write(buffer, 0, read);
+			}
+		} finally {
+			try {
+				if (ous != null)
+					ous.close();
+			} catch (IOException e) {
+			}
+
+			try {
+				if (ios != null)
+					ios.close();
+			} catch (IOException e) {
+			}
+		}
+		return ous.toByteArray();
+	}
 
 	public List<Produto> getLstProduto() {
 		return lstProduto;
 	}
 
-
 	public void setLstProduto(List<Produto> lstProduto) {
 		this.lstProduto = lstProduto;
 	}
-
 
 	public Produto getProduto() {
 		return produto;
 	}
 
-
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
-
 
 	public int getId() {
 		return id;
@@ -126,46 +211,29 @@ public class ProdutoAction extends ActionSupport {
 		this.id = id;
 	}
 
-	public File getFileUpload() {
-		return fileUpload;
+	public File getUpload() {
+		return upload;
 	}
 
-	public void setFileUpload(File fileUpload) {
-		this.fileUpload = fileUpload;
+	public void setUpload(File upload) {
+		this.upload = upload;
 	}
 
-	public String getFileUploadContentType() {
-		return fileUploadContentType;
+	public String getUploadFileName() {
+		return uploadFileName;
 	}
 
-	public void setFileUploadContentType(String fileUploadContentType) {
-		this.fileUploadContentType = fileUploadContentType;
+	public void setUploadFileName(String uploadFileName) {
+		this.uploadFileName = uploadFileName;
 	}
 
-	public String getFileUploadFileName() {
-		return fileUploadFileName;
+	public String getUploadContentType() {
+		return uploadContentType;
 	}
 
-	public void setFileUploadFileName(String fileUploadFileName) {
-		this.fileUploadFileName = fileUploadFileName;
-	}
+	public void setUploadContentType(String uploadContentType) {
+		this.uploadContentType = uploadContentType;
+	}    
 
-	public InputStream getInputStream() {
-		return inputStream;
-	}
-
-	public void setInputStream(InputStream inputStream) {
-		this.inputStream = inputStream;
-	}
-
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
 	
-	
-
 }

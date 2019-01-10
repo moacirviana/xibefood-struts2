@@ -154,9 +154,18 @@ public class VendaDAOImpl implements VendaDAO {
 		return ret;
 	}
 	
+	@Override
 	public int remover(Venda venda) throws Exception{
 		int ret = 0;
+		EntityManager em = EntityManagerProvider.getInstance().createManager();
 		try {
+			//DELETANDO ITENS
+			em.getTransaction().begin();
+			   Query query = em.createQuery("DELETE FROM VendaItens WHERE id.venda.id=?1");
+			   query.setParameter(1, venda.getId());
+			   query.executeUpdate();
+			em.getTransaction().commit();
+			em.close();
 			dao.remover(venda);
 			ret=1;
 		} catch (Exception e) {
@@ -165,22 +174,45 @@ public class VendaDAOImpl implements VendaDAO {
 		return ret;
 	}
 	
-    
 	public static void main(String[] args) throws Exception{
 		VendaDAO dao = VendaDAOImpl.getInstance();
+		
+		Venda v = new Venda();
+		// v = dao.getBean(2);
+		v.setId(3);
+		System.out.println("Venda " + v.getDatacad());
+		System.out.println(" ------------------------- ");
+		dao.remover(v);
+		System.out.println(" -----------done!!-------------- ");
+		
 		/*
 		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 		for (VendaSituacaoDTO venda : dao.listarSituacao()) {
 			System.out.println("Data " + venda.getDatacad() + " Cliente " + 
 		                       venda.getCliente() + " total = " + nf.format(venda.getTotal()) );
 		}
-		*/
-		for (ProdutosMaisVendidos v : dao.ListarProdutosMaisVendidos()) {
-			System.out.println("Produto " + v.getDescricao() + " Qtd " + v.getTotalVendidos());
+		
+		for (ProdutosMaisVendidos vv : dao.ListarProdutosMaisVendidos()) {
+			System.out.println("Produto " + vv.getDescricao() + " Qtd " + vv.getTotalVendidos());
 		}
 		
-		
-		
-		
+		*/
 	}
+	
+	/*	
+	private static void updateAllEmployeesSalaries() {
+	      System.out.println("-- increasing all employees salaries by different percentage --");
+	      EntityManager em = entityManagerFactory.createEntityManager();
+	      em.getTransaction().begin();
+	      Query query = em.createQuery("UPDATE Employee e SET e.salary = "
+	              + " CASE "
+	              + " WHEN e.dept = 'IT' THEN (e.salary * 1.20) "
+	              + " WHEN e.dept = 'Admin' THEN (e.salary * 1.15) "
+	              + " ELSE (e.salary * 1.12) "
+	              + " END");
+	      int rowsUpdated = query.executeUpdate();
+	      System.out.println("entities Updated: " + rowsUpdated);
+	      em.getTransaction().commit();
+	      em.close();
+	  } */
 }

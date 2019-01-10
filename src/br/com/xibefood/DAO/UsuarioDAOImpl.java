@@ -125,32 +125,36 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	    
 	public static void main(String[] args) throws Exception{
 		UsuarioDAO dao = UsuarioDAOImpl.getInstance();
-		/*
-		Usuario u = new Usuario();
-		u.setNome("User 01");
-		u.setEmail("a@a");
-		u.setSenha(FuncsUtils.getInstance().encriptar("123"));
-		dao.inserir(u);
+		
+		Usuario u0 = new Usuario();
+		u0.setNome("User 01");
+		u0.setEmail("a@a");
+		u0.setSenha("123");
+		u0.setAdmin(0);
+		dao.inserir(u0);
+		
 		
 		Usuario u1 = new Usuario();
 		u1.setNome("User 02");
 		u1.setEmail("b@b");
-		u1.setSenha(FuncsUtils.getInstance().encriptar("123"));
+		u1.setSenha("123");
+		u0.setAdmin(0);
 		dao.inserir(u1);
 
 		Usuario adm = new Usuario();
 		adm.setNome("admin");
 		adm.setEmail("admin");
-		adm.setSenha(FuncsUtils.getInstance().encriptar("1234"));
+		adm.setSenha("123456");
+		u0.setAdmin(1);
 		dao.inserir(adm);
-		*/
-		 
+		
+		
 		/*
 		 for (Usuario z : dao.listar()) {
 				System.out.println("id/Nome " + z.getId() +"/"+ z.getNome() + " admin=" + z.getAdmin()); 
 		 } */
 		
-		
+		/*
 		Usuario u = new Usuario();
 		u = dao.getBean("admin");
 		System.out.println("GetBean pelo ID Nome " + u.getNome() + " SENHA  " + u.getSenha());
@@ -160,6 +164,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		System.out.println("Done!");
 		u = dao.getBean("b@b");
 		System.out.println("GETBean Pelo email Nome " + u.getNome() );
-		
+	*/	
 	}
 }

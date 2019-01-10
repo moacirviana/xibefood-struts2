@@ -101,6 +101,7 @@
 			    			$("#"+id).attr("href", "frmSetupFechar?id="+id);
 			    			$("#"+id).attr('class', 'btn btn-primary');
 			    			$("#"+id).text("Pagar");
+			    			$("#"+id).prop("onclick", null).off("click");
 			    			// MUDA A COR DO CARD
 			    			$("#card"+id).attr('class', 'card text-center alert-success');
 			    		}else

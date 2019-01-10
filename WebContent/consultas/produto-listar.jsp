@@ -6,11 +6,11 @@
 <div class="container">
   <div class="container-fluid">   
 
-	<table id="table2" class="table" cellspacing="0" width="100%">
+	<table id="tbProd" class="table table-hover table-bordered" cellspacing="0" width="100%">
 	<thead>
 	<tr> 
-	    <th width="5%">Id</th>
-		<th width="8%">Descricao</th>		
+	    <th width="5%"><a href="frmSetupNovo" class="btn btn-secondary btn-sm" role="button" aria-pressed="true">Novo</a>
+		<th width="38%">Descricao</th>		
 		<th width="8%">Und</th>
 		<th width="10%">Qtd</th>
 		<th width="10%">Valor</th>
@@ -25,7 +25,8 @@
 			<td>${descricao}</td>
 			<td>${undmed}</td>
 			<td>${qtd}</td>
-			<td>${valor}</td>
+			<td class="text-right">
+			       <s:text name="format.money"><s:param value="valor"/></s:text>
 			<td>
 			<!-- 
 			    <s:if test="qtd<10">
@@ -41,7 +42,7 @@
 						          <i class="fa fa-remove" aria-hidden="true"></i>
 				</a>
 					
-				<a href="frmSetupEdit?id=${id}" class="btn btn-sm btn-info" role="button" title="Editar">
+				<a href="frmSetupEditar?id=${id}" class="btn btn-sm btn-info" role="button" title="Editar">
 							 <i class="fa fa-pencil" aria-hidden="true"></i>
 				</a>		 
 			</td>
@@ -54,9 +55,9 @@
     </div>
      		
 <jsp:include page = "/javascripts.jsp" />
-<script type="text/javascript" language="javascript" class="init">
+<script type="text/javascript">
 	$(document).ready(function() {
-	    $('#table2').dataTable( {
+	    $('#tbProd').dataTable( {
 	        "order": [[ 1, "asc" ]],
 	        "language": {
 	            "url": "../js/Portuguese-Brasil.json"
