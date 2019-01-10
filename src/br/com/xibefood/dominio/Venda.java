@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,6 +24,7 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "venda")
@@ -30,8 +32,9 @@ public class Venda implements Serializable {
 	private static final long serialVersionUID = 5099599755067507613L;
 
 	@Id
-	@GeneratedValue
-	private int id;
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="native")
+	@GenericGenerator(name = "native", strategy = "native")
+	private Integer id;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "datacad")
@@ -54,10 +57,9 @@ public class Venda implements Serializable {
 	private Integer status;
 
 	// @OneToMany(cascade = CascadeType.ALL, mappedBy = "id.venda", fetch =  FetchType.EAGER, orphanRemoval = true)
-	@OneToMany(cascade = CascadeType.REFRESH, mappedBy = "id.venda", fetch = FetchType.EAGER)
+	@OneToMany(cascade = {CascadeType.REFRESH,CascadeType.REMOVE}, mappedBy = "id.venda", fetch = FetchType.EAGER)
 	@Fetch(FetchMode.SUBSELECT)
 	private List<VendaItens> itens = new ArrayList<VendaItens>();
-	 
 
 	//@OneToMany(mappedBy = "id.venda")
 	//private List<VendaItens> itens;
@@ -66,7 +68,7 @@ public class Venda implements Serializable {
 	public Venda() {
 	}
 
-	public Venda(int id, Date datacad, Cliente cliente, Usuario usuario, Double total, String obs, Integer status) {
+	public Venda(Integer id, Date datacad, Cliente cliente, Usuario usuario, Double total, String obs, Integer status) {
 		super();
 		this.id = id;
 		this.datacad = datacad;
@@ -77,7 +79,7 @@ public class Venda implements Serializable {
 		this.status = status;
 	}
 	
-	public Venda(int id, Date datacad, Cliente cliente, Usuario usuario, Integer status) {
+	public Venda(Integer id, Date datacad, Cliente cliente, Usuario usuario, Integer status) {
 		this.id = id;
 		this.datacad = datacad;
 		this.cliente = cliente;
@@ -101,11 +103,11 @@ public class Venda implements Serializable {
 		this.itens = itens;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -166,7 +168,7 @@ public class Venda implements Serializable {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		Integer result = 1;
 		result = prime * result + id;
 		return result;
 	}

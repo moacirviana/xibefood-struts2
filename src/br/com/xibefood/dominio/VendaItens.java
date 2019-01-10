@@ -9,8 +9,6 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.sun.istack.internal.NotNull;
-
 
 @Entity
 @Table(name="venda_itens")
@@ -30,9 +28,10 @@ public class VendaItens implements Serializable{
 	private Produto produto;
 	*/
 	
-	@NotNull
+	@Column(nullable=false)
     private int quantidade;
 	
+	@Column(name="desconto", columnDefinition="Decimal(10,2) default '0.00'")
 	private Double desconto;
 	
 	@Column(name="valor")

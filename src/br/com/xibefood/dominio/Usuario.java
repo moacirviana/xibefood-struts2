@@ -5,10 +5,11 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.sun.istack.internal.NotNull;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="usuario")
@@ -16,41 +17,42 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 2950413527005250050L;
 
 	@Id
-	@GeneratedValue
-	private int id;
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="native")
+	@GenericGenerator(name = "native", strategy = "native")
+	private Integer id;
 	
-	@Column(name="nome")
-	@NotNull
+	
+	@Column(nullable=false)
 	private String nome;
 	
-	@NotNull
+	@Column(nullable=false)
 	private String email;	
 	
-	@NotNull
+	@Column(nullable=false)
 	private String senha;
 	
-	@NotNull
+	@Column(nullable=false)
 	private Integer admin;
 	
 	public Usuario() {
 	}
 	
-	public Usuario(int codigo, String name){
+	public Usuario(Integer codigo, String name){
 		this.id = codigo;
 		this.nome = name;
 	}
 	
-	public Usuario(int codigo, String name, String senha, String email){
+	public Usuario(Integer codigo, String name, String senha, String email){
 		this.id = codigo;
 		this.nome = name;
 		this.senha = senha;
 		this.email = email;
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getNome() {
@@ -83,7 +85,7 @@ public class Usuario implements Serializable {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		Integer result = 1;
 		result = prime * result + id;
 		return result;
 	}
