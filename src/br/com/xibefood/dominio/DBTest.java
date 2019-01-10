@@ -1,65 +1,115 @@
 package br.com.xibefood.dominio;
 
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-
 import br.com.xibefood.DAO.ClienteDAO;
 import br.com.xibefood.DAO.ClienteDAOImpl;
 import br.com.xibefood.DAO.ProdutoDAO;
 import br.com.xibefood.DAO.ProdutoDAOImpl;
+import br.com.xibefood.DAO.UsuarioDAO;
 import br.com.xibefood.DAO.UsuarioDAOImpl;
-import br.com.xibefood.DAO.VendaDAO;
-import br.com.xibefood.DAO.VendaDAOImpl;
-import br.com.xibefood.DAO.VendaItemDAO;
-import br.com.xibefood.DAO.VendaItemDAOImpl;
 
 public class DBTest {
 
 	public static void main(String[] args) throws Exception{
-		/*
+		
 		ClienteDAO daoC = ClienteDAOImpl.getInstance();
 		Cliente c = new Cliente();
 		c.setNome("MESA 01");
-		c.setCpf("04336034028");
-		c.setEmail("moacir.viana@gmail.com");
-		c.setStatus(1);
+		c.setCpf("m1");
+		c.setEmail("m1@m1");
+		c.setAtivo(1);
 		daoC.inserir(c);
 		Cliente c1 = new Cliente();
 		c1.setNome("MESA 02");
-		c1.setCpf("37644815015");
-		c1.setEmail("souzasilvar@yahoo.com");
-		c1.setStatus(1);
+		c1.setCpf("m2");
+		c1.setEmail("m2@m2");
+		c1.setAtivo(1);
 		daoC.inserir(c1);
 		Cliente c2 = new Cliente();
 		c2.setNome("MESA 03");
-		c2.setCpf("57044824064");
-		c2.setEmail("josedasilva@hotmail.com");
-		c2.setStatus(1);
+		c2.setCpf("m3");
+		c2.setEmail("m3@m3");
+		c2.setAtivo(1);
 		daoC.inserir(c2);
-		
-		
+		Cliente c3 = new Cliente();
+		c3.setNome("MESA 04");
+		c3.setCpf("m4");
+		c3.setEmail("m4@m4");
+		c3.setAtivo(1);
+		daoC.inserir(c3);
+		Cliente c4 = new Cliente();
+		c4.setNome("MESA 05");
+		c4.setCpf("m5");
+		c4.setEmail("m5@m5");
+		c4.setAtivo(1);
+		daoC.inserir(c4);
+				
+		// PRODUTOS
 		Produto p1 = new Produto();
 		p1.setDescricao("Frango Crispy");
 		p1.setValor(40.40);
-		p1.setTitulo("Frango");
+		p1.setTitulo("frango");
 		Produto p2 = new Produto();
 		p2.setDescricao("Vaca atolada 1 Pessoa");
 		p2.setValor(13.50);
-		p2.setTitulo("Carne");
+		p2.setTitulo("carne");
 		Produto p3 = new Produto();
 		p3.setDescricao("Picanha na Brasa 2 Pessoas");
 		p3.setValor(38.99);
-		p3.setTitulo("Carde");
+		p3.setTitulo("carne");
 		Produto p4 = new Produto();
 		p4.setDescricao("Tambaqui Assado 3 pessoas");
 		p4.setValor(75.99);
-		p4.setTitulo("Peixe");
+		p4.setTitulo("peixe");
+		Produto p5 = new Produto();
+		p5.setDescricao("Agua 350ml");
+		p5.setValor(2.30);
+		p5.setTitulo("bebida");
+		Produto p6 = new Produto();
+		p6.setDescricao("Cerveja 600ml");
+		p6.setValor(7.30);
+		p6.setTitulo("bebida");
+		Produto p7 = new Produto();
+		p7.setDescricao("Suco Graviola Jarra 1L");
+		p7.setValor(12.50);
+		p7.setTitulo("bebida");
+		Produto p8 = new Produto();
+		p8.setDescricao("Creme de cupuaçu com chocolate");
+		p8.setValor(6.30);
+		p8.setTitulo("sobremesa");
+		
 		ProdutoDAO daoP = ProdutoDAOImpl.getInstance();
 		daoP.inserir(p1);
 		daoP.inserir(p2);
 		daoP.inserir(p3);
 		daoP.inserir(p4);
-		*/
+		daoP.inserir(p5);
+		daoP.inserir(p6); daoP.inserir(p7); daoP.inserir(p8);
+		
+		// USUARIO DO SISTEMA
+		UsuarioDAO daoUser = UsuarioDAOImpl.getInstance();
+		
+		Usuario u = new Usuario();
+		u.setNome("User 01");
+		u.setEmail("a@a");
+		u.setAdmin(0);
+		u.setSenha("1234");
+		daoUser.inserir(u);
+		
+		Usuario u1 = new Usuario();
+		u1.setNome("User 02");
+		u1.setEmail("b@b");
+		u1.setSenha("1234");
+		u1.setAdmin(0);
+		daoUser.inserir(u1);
+
+		Usuario adm = new Usuario();
+		adm.setNome("admin");
+		adm.setEmail("admin");
+		adm.setAdmin(1);
+		adm.setSenha("123456");
+		daoUser.inserir(adm);
+		
+		System.out.println("Done");
 		
 		/*
 		Cliente c = new Cliente();
