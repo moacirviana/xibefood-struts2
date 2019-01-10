@@ -90,7 +90,7 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-    $( "#btnFecharVenda" ).click(function() {
+    $("#btnFecharVenda").click(function() {
     	bootbox.confirm("Confirma o fechamento ?", function(result){ 		  
            if (result){
     	    	var dados = $('#frmComanda').serialize();
@@ -103,6 +103,8 @@ $(document).ready(function() {
 		    				type: 'success'
 		    			});
 		    			$("#btnFecharVenda").addClass('disabled');
+		    			$("#btnFecharVenda").prop("disabled",true);
+		    			$("#btnFecharVenda").prop('value', 'Comanda fechada');
 		    		}else
 		    			{
 			    			$.notify({

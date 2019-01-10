@@ -190,10 +190,10 @@ public class ClienteAction extends ActionSupport {
 	}
 	
 	
-	@Action(value = "frmSetupNew", results = { @Result(name = "success", location = "/forms/frmCliente.jsp"),
+	@Action(value = "frmSetupNovo", results = { @Result(name = "success", location = "/forms/frmCliente.jsp"),
 			@Result(name = "error", location = "/pages/error.jsp")},
 			interceptorRefs = @InterceptorRef("authStack"))
-	public String frmSetupNew() {
+	public String frmSetupNovo() {
 		try {
 			this.flag = "inserir";
 		} catch (Exception e) {
@@ -203,10 +203,10 @@ public class ClienteAction extends ActionSupport {
 		return "success";
 	}
 	
-	@Action(value = "frmSetupEdit", results = { @Result(name = "success", location = "/forms/frmCliente.jsp"),
+	@Action(value = "frmSetupEditar", results = { @Result(name = "success", location = "/forms/frmCliente.jsp"),
 			@Result(name = "error", location = "/pages/error.jsp")} 
 	)			// interceptorRefs = @InterceptorRef("authStack")
-	public String frmSetupEdit() {
+	public String frmSetupEditar() {
 		try {
 			this.flag = "alterar";
 			this.cliente = ClienteDAOImpl.getInstance().getBean(this.id);

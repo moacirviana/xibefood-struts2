@@ -5,11 +5,11 @@
 <div class="container">
   <div class="container-fluid">   
 
-	<table id="table2" class="table">
+	<table id="tbClin" class="table table-hover table-bordered">
 	<thead>
 	<tr> 
-	    <th width="5%"><a href="frmSetupNew" class="btn btn-secondary btn-sm" role="button" aria-pressed="true">Novo</a>
-		<th width="8%">Nome</th>		
+	    <th width="5%"><a href="frmSetupNovo" class="btn btn-secondary btn-sm" role="button" aria-pressed="true">Novo</a>
+		<th width="38%">Nome</th>		
 		<th width="8%">Endereco</th>
 		<th width="10%"></th>
 		<th width="10%"></th>
@@ -35,7 +35,7 @@
 						          <i class="fa fa-trash-o" aria-hidden="true"></i>
 				</a>
 					
-				<a href="frmSetupEdit?id=${id}" class="btn btn-sm btn-info" role="button" title="Editar">
+				<a href="frmSetupEditar?id=${id}" class="btn btn-sm btn-info" role="button" title="Editar">
 							 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 				</a>		 
 			</td>
@@ -48,9 +48,14 @@
 </div>
      		
 <jsp:include page = "/javascripts.jsp" />
-<script type="text/javascript" language="javascript" class="init">
+<script type="text/javascript">
 	$(document).ready(function() {
-
+		$('#tbClin').dataTable( {
+	        "order": [[ 1, "asc" ]],
+	        "language": {
+	            "url": "../js/Portuguese-Brasil.json"
+	        }
+	    });
 
 	    $( "[id*='excluir']" ).click(function(event) {
 			var data = $(event.delegateTarget).data();
