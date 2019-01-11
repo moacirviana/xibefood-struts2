@@ -91,12 +91,13 @@
 	    	    	var url = "mudarStatus?id=1&venda.id=" + id;
 			    	$.getJSON( url, function( data ) {
 			    		if (data.id==1){
-			    			$.notify({
-			    				title: '<strong>Mensagem </strong>',
-			    				message: data.mensagem
-				    			},{
-				    				type: 'success'
-				    			});
+			    			
+			    			$.notify(data.mensagem, {
+			    				animate: {
+			    					enter: 'animated rollIn',
+			    					exit: 'animated rollOut'
+			    				}
+			    			});
 			    			// MUDAR O BOTÃO PARA EFETUAR O PAGAMENTO
 			    			$("#"+id).attr("href", "frmSetupFechar?id="+id);
 			    			$("#"+id).attr('class', 'btn btn-primary');
