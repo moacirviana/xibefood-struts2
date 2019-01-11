@@ -1,5 +1,6 @@
 package br.com.xibefood.action;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,8 +32,46 @@ public class ProdutoAction extends ActionSupport {
 	private File upload;
 	private String uploadFileName;
 	private String uploadContentType;
+	private InputStream inputStream;
 	
-    @Action(value = "frmSetupNovo", results = { @Result(name = "success", location = "/forms/frmNovoProduto.jsp"),
+    
+	@Action(value = "/showImagem",
+            results = { @Result(name = "success", type = "stream",
+                params = { "contentType", "image/jpeg,image/png,image/gif",
+                            "inputName", "inputStream",
+                            "bufferSize", "1024"}) })
+		public String showImagem() {
+			try {
+					this.produto = ProdutoDAOImpl.getInstance().getBean(this.id);
+					byte[] buffer = this.produto.getPicture();
+					inputStream = new ByteArrayInputStream(buffer);
+				}catch (Exception e) {
+					return "error";
+			}
+		return "success";
+	}
+	
+	
+	@Action(value = "/downloadImagem",
+            results = { @Result(name = "success", type = "stream",
+                params = { "contentType", "application/octet-stream",
+                            "inputName", "inputStream",
+                            "bufferSize", "1024",
+                            "contentDisposition","filename=\"${uploadFileName}\"" }) })
+	public String downloadImagem() {
+			try {
+					this.produto = ProdutoDAOImpl.getInstance().getBean(this.id);
+					this.uploadFileName = this.produto.getDescricao();
+					byte[] buffer = this.produto.getPicture();
+					inputStream = new ByteArrayInputStream(buffer);
+				}catch (Exception e) {
+					return "error";
+			}
+		return "success";
+	}
+	
+	
+	@Action(value = "frmSetupNovo", results = { @Result(name = "success", location = "/forms/frmNovoProduto.jsp"),
 		@Result(name = "error", location = "/pages/error.jsp")},
 		interceptorRefs = @InterceptorRef("authStack"))
 	public String setupNovoProduto() {
@@ -59,7 +98,7 @@ public class ProdutoAction extends ActionSupport {
 		},
 	            interceptorRefs={
 		        @InterceptorRef(
-		            params={"allowedTypes","image/jpeg,application/zip",
+		            params={"allowedTypes","image/jpeg,image/png,image/gif",
 				    "maximumSize","1000000"}, 
 		            value="fileUpload"
 		        ),
@@ -233,6 +272,16 @@ public class ProdutoAction extends ActionSupport {
 
 	public void setUploadContentType(String uploadContentType) {
 		this.uploadContentType = uploadContentType;
+	}
+
+
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
 	}    
 
 	

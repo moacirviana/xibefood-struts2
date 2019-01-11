@@ -14,7 +14,7 @@
 		<th width="8%">Und</th>
 		<th width="10%">Qtd</th>
 		<th width="10%">Valor</th>
-		<th width="10%"></th>
+		<th width="5%"></th>
 		<th width="10%"></th>
 	</tr>
 	</thead>
@@ -27,7 +27,13 @@
 			<td>${qtd}</td>
 			<td class="text-right">
 			       <s:text name="format.money"><s:param value="valor"/></s:text>
-			<td>
+			<td class="text-center">
+			   <!-- SE TEM IMAGEM MOSTRA O ÍCONE PARA VISUALIZAÇÃO -->
+			   <s:if test="picture!=null">
+			      <a href="#" data-target="#modalIMG" data-toggle="modal" data-imagemid="${id}" class="color-gray-darker c6 td-hover-none">
+			         <i class="fa fa-file-image-o" aria-hidden="true"></i>
+			      </a>   
+			   </s:if>
 			<!-- 
 			    <s:if test="qtd<10">
 			       <span class="badge badge-danger">Insuficiente</span>
@@ -53,6 +59,21 @@
 	
      </div>  
     </div>
+
+<!-- MODAL PARA VISUALIZAÇÃO DAS IMAGENS -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG" role="dialog" tabindex="-1">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-body mb-0 p-0">
+				    <img id="imgdobanco" src="" alt="" style="width:100%">
+			</div>
+			<div class="modal-footer">
+				<div><a class="btn btn-outline-primary btn-rounded" id="donwimg" href="" target="_blank">Download</a></div>
+				<button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
      		
 <jsp:include page = "/javascripts.jsp" />
 <script type="text/javascript">
@@ -68,7 +89,6 @@
 			var data = $(event.delegateTarget).data();
 			var id = data.recordId;
 			var nome = data.recordNome;
-			
 			bootbox.confirm("Confirma essa exclusão do cliente " + nome, function(result){ 		  
 		           if (result){
 		    	    	
@@ -93,10 +113,14 @@
 		    	  });
 	        });
 			
-			
-	    
-	    
-	});
+    $('#modalIMG').on('show.bs.modal', function (event) {
+	  	  var href = $(event.relatedTarget)
+	  	  var id = href.data('imagemid') 
+	  	  $('#imgdobanco').attr('src',"showImagem?id="+id);
+	  	  $('#donwimg').attr('href',"downloadImagem?id="+id);
+  	});
+    
+});
 </script>	
 
 

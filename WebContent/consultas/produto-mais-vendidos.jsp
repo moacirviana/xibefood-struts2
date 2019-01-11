@@ -6,7 +6,7 @@
 <div class="container">
   <div class="container-fluid">   
 
-	<table id="table2" class="table table-hover" cellspacing="0" width="100%">
+	<table id="table2" class="table table-hover">
 	<thead>
 	<tr> 
 	    <th width="5%">Id</th>
@@ -30,7 +30,7 @@
 	<br>
 	<div class="row">
 		<div class="col col-md-5">
-			<h4>Resultados gráfico:</h4>
+			<h4>Gráfico:</h4>
 				
 			<s:iterator value="lstProdutosMaisVendidos">	
 				${descricao}<span class="pull-right strong">${totalVendidos}</span>
@@ -41,7 +41,7 @@
 				
 		</div>
 	</div>
-						
+		
 						
      </div>  
     </div>
