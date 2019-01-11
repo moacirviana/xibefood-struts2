@@ -63,7 +63,7 @@
 			    
 			  </div>
 			  				  
-			  <button id="btnFecharVenda" type="button" class="btn btn-sm btn-success">Pagar</button>
+			  <button id="btnFecharVenda" type="button" class="btn btn-sm btn-success" >Pagar</button>
 			   
        </form>
        <br>
@@ -104,7 +104,7 @@ $(document).ready(function() {
 		    			});
 		    			$("#btnFecharVenda").addClass('disabled');
 		    			$("#btnFecharVenda").prop("disabled",true);
-		    			$("#btnFecharVenda").prop('value', 'Comanda fechada');
+		    			$("#btnFecharVenda").html("Comanda fechada");
 		    		}else
 		    			{
 			    			$.notify({
