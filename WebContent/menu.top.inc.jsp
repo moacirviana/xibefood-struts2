@@ -31,7 +31,6 @@
               <a class="dropdown-item" href="${pageContext.request.contextPath}/comandas/listar">Comanda</a>
               <a class="dropdown-item" href="${pageContext.request.contextPath}/produtos/listar">Produtos</a>
               <a class="dropdown-item" href="${pageContext.request.contextPath}/comandas/getProdutosMaisVendidos">Mais Vendidos</a>
-              <a class="dropdown-item" href="${pageContext.request.contextPath}/upload/frmCad">Upload de arquivo</a>
             </div>
           </li>
           
