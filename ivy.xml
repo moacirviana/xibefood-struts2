@@ -19,9 +19,9 @@
 	 <dependencies>
 	         
 	        <!-- <dependency org="org.apache.struts" name="struts2-core" rev="2.5.16" conf="*->default"/> -->
-	        <dependency org="org.apache.struts" name="struts2-core" rev="2.5.16" />
-			<dependency org="org.apache.struts" name="struts2-convention-plugin" rev="2.5.16"/>
-			<dependency org="org.apache.struts" name="struts2-json-plugin" rev="2.5.16" transitive="false"/>
+	        <dependency org="org.apache.struts" name="struts2-core" rev="2.5.20" />
+			<dependency org="org.apache.struts" name="struts2-convention-plugin" rev="2.5.20"/>
+			<dependency org="org.apache.struts" name="struts2-json-plugin" rev="2.5.20" transitive="false"/>
 			<dependency org="org.freemarker" name="freemarker" rev="2.3.28" transitive="false"/> 
 			
 			<!-- <dependency org="org.ow2.asm" name="asm" rev="5.2" transitive="false"/> -->
