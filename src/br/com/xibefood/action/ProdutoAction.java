@@ -71,7 +71,7 @@ public class ProdutoAction extends ActionSupport {
 	}
 	
 	
-	@Action(value = "frmSetupNovo", results = { @Result(name = "success", location = "/forms/frmNovoProduto.jsp"),
+	@Action(value = "frmSetupNovo", results = { @Result(name = "success", location = "/forms/frmProduto.jsp"),
 		@Result(name = "error", location = "/pages/error.jsp")},
 		interceptorRefs = @InterceptorRef("authStack"))
 	public String setupNovoProduto() {
@@ -79,7 +79,7 @@ public class ProdutoAction extends ActionSupport {
 	}
     
     
-    @Action(value = "frmSetupEditar", results = { @Result(name = "success", location = "/forms/frmNovoProduto.jsp"),
+    @Action(value = "frmSetupEditar", results = { @Result(name = "success", location = "/forms/frmProduto.jsp"),
     		@Result(name = "error", location = "/pages/error.jsp")},
     		interceptorRefs = @InterceptorRef("authStack"))
     	public String frmSetupEditar() {
