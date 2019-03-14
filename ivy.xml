@@ -41,7 +41,7 @@
 			
 			<dependency org="dom4j" name="dom4j" rev="1.6.1" transitive="false"/>
 			
-			<dependency org="mysql" name="mysql-connector-java" rev="5.1.13"/>
+			<!-- <dependency org="mysql" name="mysql-connector-java" rev="5.1.13"/> -->
 			
 			<!-- <dependency org="org.xerial" name="sqlite-jdbc" rev="3.25.2"/> -->		
 			
