@@ -43,7 +43,22 @@
 			
 			<dependency org="mysql" name="mysql-connector-java" rev="5.1.13"/>
 			
-			<!-- <dependency org="org.xerial" name="sqlite-jdbc" rev="3.25.2"/> -->			
+			<!-- <dependency org="org.xerial" name="sqlite-jdbc" rev="3.25.2"/> -->		
+			
+			
+			
+			 <!-- 
+			 <dependency org="mysql" name="mysql-connector-java" rev="5.1.13"/>
+			 https://mvnrepository.com/artifact/com.h2database/h2 
+			 -->
+			
+			 <!--
+			  <dependency org="javax.servlet" name="jstl" rev="1.2"/>
+		      <dependency org="mysql" name="mysql-connector-java" rev="8.0.11"/>	 
+	 		  <dependency org="mysql" name="mysql-connector-java" rev="5.1.13"/>                        
+              <dependency org="mysql" name="mysql-connector-java" rev="6.0.6"/> 
+              <dependency org="com.h2database" name="h2" rev="1.4.196"/>
+            -->	
  
 		</dependencies>
 		
