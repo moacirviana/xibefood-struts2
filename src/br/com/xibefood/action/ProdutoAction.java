@@ -126,8 +126,8 @@ public class ProdutoAction extends ActionSupport {
 	
 	
 	  @Action( value = "/alterar",
-			results={@Result(name="success",location="/forms/frmNovoProduto.jsp"),
-			         @Result(name="input",location="/forms/frmNovoProduto.jsp")
+			results={@Result(name="success",location="/forms/frmProduto.jsp"),
+			         @Result(name="input",location="/forms/frmProduto.jsp")
 				}, interceptorRefs={
 				        @InterceptorRef(
 				            params={"allowedTypes","image/jpeg,image/gif,image/png",
