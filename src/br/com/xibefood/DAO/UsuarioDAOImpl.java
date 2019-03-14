@@ -125,7 +125,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	    
 	public static void main(String[] args) throws Exception{
 		UsuarioDAO dao = UsuarioDAOImpl.getInstance();
-		
+		/*
 		Usuario u0 = new Usuario();
 		u0.setNome("User 01");
 		u0.setEmail("a@a");
@@ -147,12 +147,12 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		adm.setSenha("123456");
 		u0.setAdmin(1);
 		dao.inserir(adm);
+		*/
 		
 		
-		/*
 		 for (Usuario z : dao.listar()) {
 				System.out.println("id/Nome " + z.getId() +"/"+ z.getNome() + " admin=" + z.getAdmin()); 
-		 } */
+		 } 
 		
 		/*
 		Usuario u = new Usuario();
