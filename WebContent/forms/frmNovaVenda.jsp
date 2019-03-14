@@ -36,21 +36,20 @@
 			  </div>
 			  				  
 			   <div class="form-row">
-			    <table class="table">
+			    <div class="table-responsive">
+			    <table class="table table-sm">
 					  <thead>
 					    <tr>
-					      <th scope="col">#</th>
-					      <th scope="col">Produto</th>
+					      <th scope="col">Prod</th>
 					      <th scope="col">VlUnd</th>
 					      <th scope="col">Qtd</th>
-					      <th scope="col">Valor R$</th>
-					      <th scope="col"><button id="add-row" type="button" class="btn btn-sm btn-info">Add Item</button></th>
-					      
+					      <th scope="col">R$</th>
+					      <th scope="col"></th>
 					    </tr>
+					    
 					  </thead>
 					  <tbody>
 					    <tr id="rowid0">
-					      <th scope="row">0</th>
 					      <td> 
 					        <select class="form-control form-control-sm" name="itens[0].id.produto.id" id="produto0" onChange="getValor(0,this.value)">
 					          <option value="1" selected>1</option>
@@ -60,16 +59,15 @@
 					      <td><input name="itens[0].quantidade" id="qtd0" type="text" size="5" value="1" class="form-control form-control-sm"></td>
 					      <td><input name="itens[0].valor" id="vlr0" type="text" size="5" value="" class="form-control form-control-sm"></td>
 					      <td></td>
-					      
 					    </tr>
 	    				
 					  </tbody>
 					</table>
-			    
+			     </div>  
 			    
 			  </div>
 			  				  
-			   <button id="btnVenda" type="button" class="btn btn-sm btn-success">Salvar</button>
+			   <button id="add-row" type="button" class="btn btn-sm btn-info">Add Item</button> <button id="btnVenda" type="button" class="btn btn-sm btn-success">Salvar</button>
 			   
        </form>
        <br>
@@ -122,7 +120,7 @@ $(document).ready(function() {
  
 	 $("#add-row").click(function(){
 		 line++;
-         var markup ='<tr><th scope="row">'+line+'</th>'+
+         var markup ='<tr>'+
 				      '<td>'+ 
 				        '<select class="form-control form-control-sm" onChange="getValor('+line+',this.value)" name="itens['+line+'].id.produto.id" id="produto'+line+'">'+
 				                '<option value="1">1</option>'+
@@ -131,7 +129,7 @@ $(document).ready(function() {
 			          '<td><input name="itens['+line+'].valorunt" id="vlrund'+line+'" size="3" type="text" value="" class="form-control form-control-sm"></td>'+
 				      '<td><input name="itens['+line+'].quantidade" size="5" id="qtd'+line+'" type="text" value="1" class="form-control form-control-sm"></td>'+
 				      '<td><input name="itens['+line+'].valor" size="5" id="vlr'+line+'" type="text" value="" class="form-control form-control-sm"></td>'+
-				      '<td><button class="btn btn-sm btn-danger" onclick="removeRow(this)" type="button">Remover</button></td>'+
+				      '<td><button class="btn btn-sm btn-danger" onclick="removeRow(this)" type="button"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>'+
 				    '</tr>';
           $("table tbody").append(markup);
           CarregaProduto(line);

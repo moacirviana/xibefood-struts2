@@ -24,7 +24,9 @@
     </init-param>
     <init-param>
         <param-name>cors.support.credentials</param-name>
-        <param-value>true</param-value>
+        <param-value>false</param-value>
+         <!-- na versão tomcat 8.5.37 foi ajustado o param cors.support.credentials = false, sem esse ajuste ocorre o erro: -->
+        <!-- javax.servlet.ServletException: It is not allowed to configure supportsCredentials=[true] when allowedOrigins=[*] -->
     </init-param>
     <init-param>
         <param-name>cors.preflight.maxage</param-name>

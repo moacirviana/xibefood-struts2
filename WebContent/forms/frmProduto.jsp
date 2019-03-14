@@ -24,9 +24,13 @@
 			  <div class="form-row">
 			    <div class="form-group col-md-6">
 			      <label for="inputEmail">Imagem</label>
-			          <s:if test='produto.id != null'>
-			             <img src="showImagem?id=${produto.id}" class="img-thumbnail" alt="200x200" style="width: 250px; height: 200px;" data-holder-rendered="true">
+			   
+			          <s:if test="produto.picture!=null">
+			             <img src="showImagem?id=${produto.id}" class="img-thumbnail" style="width: 250px; height: 200px;" data-holder-rendered="true">
 			          </s:if>
+			          <s:else>
+			               <img src="../images/silhueta-comida.png" class="img-thumbnail" style="width: 250px; height: 200px;" data-holder-rendered="true">
+			          </s:else>
 			    </div>
 			    <div class="form-group col-md-6">
 			          <label for="inputEmail">Valor</label>
