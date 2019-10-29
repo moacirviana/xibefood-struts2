@@ -1,0 +1,4 @@
+//disableOptimizations//WebContent/WEB-INF/js/vendas.js=true
+//minifier//WebContent/WEB-INF/js/vendas.js=YuiCompressor
+//preserveSemicolons//WebContent/WEB-INF/js/vendas.js=true
+eclipse.preferences.version=1
