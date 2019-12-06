@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 
 import br.com.xibefood.dominio.Usuario;
 import br.jus.xibefood.util.FuncsUtils;
+import oracle.net.aso.t;
 
 public class UsuarioDAOImpl implements UsuarioDAO {
 	
@@ -125,45 +126,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	    
 	public static void main(String[] args) throws Exception{
 		UsuarioDAO dao = UsuarioDAOImpl.getInstance();
-		/*
-		Usuario u0 = new Usuario();
-		u0.setNome("User 01");
-		u0.setEmail("a@a");
-		u0.setSenha("123");
-		u0.setAdmin(0);
-		dao.inserir(u0);
+		
+		 for (Usuario u : dao.listar()) { 
+			 System.out.println(u.toString());
+		 }
+		 
+		 System.out.println("Done!!");
 		
 		
-		Usuario u1 = new Usuario();
-		u1.setNome("User 02");
-		u1.setEmail("b@b");
-		u1.setSenha("123");
-		u0.setAdmin(0);
-		dao.inserir(u1);
-
-		Usuario adm = new Usuario();
-		adm.setNome("admin");
-		adm.setEmail("admin");
-		adm.setSenha("123456");
-		u0.setAdmin(1);
-		dao.inserir(adm);
-		*/
-		
-		
-		 for (Usuario z : dao.listar()) {
-				System.out.println("id/Nome " + z.getId() +"/"+ z.getNome() + " admin=" + z.getAdmin()); 
-		 } 
-		
-		/*
-		Usuario u = new Usuario();
-		u = dao.getBean("admin");
-		System.out.println("GetBean pelo ID Nome " + u.getNome() + " SENHA  " + u.getSenha());
-		System.out.println("Senha crip " + FuncsUtils.getInstance().encriptar("123456"));
-		System.out.println("Permissão -> " + u.getSenha().equals(FuncsUtils.getInstance().encriptar("123456")));
-		
-		System.out.println("Done!");
-		u = dao.getBean("b@b");
-		System.out.println("GETBean Pelo email Nome " + u.getNome() );
-	*/	
 	}
 }
