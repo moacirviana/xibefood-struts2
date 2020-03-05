@@ -62,11 +62,12 @@
     </div>
 
 <!-- MODAL PARA VISUALIZAÇÃO DAS IMAGENS -->
+
 <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG" role="dialog" tabindex="-1">
-	<div class="modal-dialog modal-lg" role="document">
+	<div class="modal-dialog modal-sm" role="document">
 		<div class="modal-content">
-			<div class="modal-body mb-0 p-0">
-				    <img id="imgdobanco" src="" alt="" style="width:100%">
+			<div class="modal-body mb-0 p-0 text-center">
+				    <img id="imgdobanco" src="" alt="" class="img-fluid">
 			</div>
 			<div class="modal-footer">
 				<div><a class="btn btn-outline-primary btn-rounded" id="donwimg" href="" target="_blank">Download</a></div>

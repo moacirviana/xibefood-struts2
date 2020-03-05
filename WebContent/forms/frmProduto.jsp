@@ -78,7 +78,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	    $( "#btnEnviar" ).click(function() {
-	    	bootbox.confirm("Confirma essa venda?", function(result){ 		  
+	    	bootbox.confirm("Confirma esses dados?", function(result){ 		  
 	           if (result){
 	        	   $("#frmProduto" ).submit();
 	    	   } 	
