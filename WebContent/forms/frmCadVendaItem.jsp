@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<s:set var="mnuItemComanda">active</s:set>
 <jsp:include page = "/mainhead.inc.jsp" />
 
 

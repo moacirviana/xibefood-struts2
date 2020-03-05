@@ -5,26 +5,23 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="${pageContext.request.contextPath}/clientes/listar">Cliente<span class="sr-only">(current)</span></a>
-          </li>
-                 
-          <li class="nav-item">
+                           
+          <li class="nav-item ${mnuComanda}">
             <a class="nav-link" href="${pageContext.request.contextPath}/comandas/frmSetupNova">Comanda</a>
           </li>
           
-          <li class="nav-item">
+          <li class="nav-item ${mnuItemComanda}">
             <a class="nav-link" href="${pageContext.request.contextPath}/comandas/frmCadVendaItem">Itens</a>
           </li>
           
-          <li class="nav-item">
+          <li class="nav-item ${statusVenda}">
             <a class="nav-link" href="${pageContext.request.contextPath}/comandas/situacao">Situação</a>
           </li>
           <!-- 
           <li class="nav-item">
             <a class="nav-link disabled" href="#">Disabled</a>
           </li>  -->
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown ${mnuConsulta}">
             <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Consultas</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
               <a class="dropdown-item" href="${pageContext.request.contextPath}/clientes/listar">Clientes</a>

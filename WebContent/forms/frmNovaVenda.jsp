@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<s:set var="mnuComanda">active</s:set>
 <jsp:include page = "/mainhead.inc.jsp" />
-
 
 <div class="container">
    <div class="card">

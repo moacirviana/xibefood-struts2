@@ -10,7 +10,7 @@ public class EntityManagerProvider {
     private final EntityManagerFactory factory;
 
     private EntityManagerProvider() {
-        this.factory = Persistence.createEntityManagerFactory("oracle");
+        this.factory = Persistence.createEntityManagerFactory("mysql");
     }
 
     public static EntityManagerProvider getInstance() {
